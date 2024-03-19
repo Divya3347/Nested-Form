@@ -1,0 +1,20 @@
+<%= form_with model: @author do |f|%>
+    <%= f.label :name , "Name : "%>
+    <%= f.text_field :name , placeholder:"Enter author name"%><br><br>
+
+    <%= f.label :age , "Age : "%>
+    <%= f.text_field :age , placeholder:"Enter author age"%><br><br>
+
+    <%= f.fields_for :books do |book_form| %>
+        <%= book_form.label :name , "Book Name"%>
+        <%= book_form.text_field :name , placeholder:"Enter book name" %><br><br>
+
+        <%= book_form.label :quantity %>
+        <%= book_form.text_field :quantity , placeholder:"Enter book quntity"%><br><br>
+
+        <%= book_form.label :price %>
+        <%= book_form.text_field :price , placeholder:"Enter book price"%><br><br>
+    <% end %>
+
+    <%= f.submit "Save Author"%>
+<% end %>

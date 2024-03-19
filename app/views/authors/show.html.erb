@@ -1,0 +1,38 @@
+<h1> Author Details </h1>
+Name : <%= @author.name %><br>
+Age : <%= @author.age %><br><br>
+
+<%= link_to "Edit Author" , edit_author_path %><br><br>
+<%= link_to "Delete Author" , author_path , data:{
+    turbo_method: :delete,
+    turbo_confirm:"Are you sure?"
+}%><br><br>
+<%= link_to "View All" , root_path%>
+
+<h1> Books List </h1>
+<% if @author.books.present? %>
+    <% @author.books.each do |book|%>
+        Book ID : <%= book.id %><br>
+        Name : <%= book.name %><br>
+        Price : <%= book.price %><br>
+        Quantity : <%= book.quantity %><br>
+        <%= link_to "Delete Book" , author_book_path(@author,book),data:{
+            turbo_method: :delete,
+            turbo_confirm:"Are you sure?"
+        }%><br><br>
+    <% end %>
+<% end %>
+
+<h1> New Book </h1>
+<%= form_with model: [@author , Book.new] do |f| %>
+    <%= f.label :name , "Name : "%>
+    <%= f.text_field :name , placeholder:"Enter Book Name"%><br><br>
+
+    <%= f.label :price , "price : "%>
+    <%= f.text_field :price , placeholder:"Enter Book price"%><br><br>
+
+    <%= f.label :quantity , "Quantity : "%>
+    <%= f.text_field :quantity , placeholder:"Enter Book quantity"%><br><br>
+    
+    <%= f.submit "Save book"%>
+<% end %>
